@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title></title>
+    </head>
+
+    <body>
+        <img style="position:absolute; display:none; z-index:99;" id="myImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Aristotle_Altemps_Inv8575.jpg/220px-Aristotle_Altemps_Inv8575.jpg" alt="image" height="100" /></span>
+
+        <canvas id="myCanvas" width="4000" height="1000"></canvas>
+        <script>
+
+            var aristotle = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Aristotle_Altemps_Inv8575.jpg/220px-Aristotle_Altemps_Inv8575.jpg';
+            var plato = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Plato_Silanion_Musei_Capitolini_MC1377.jpg/220px-Plato_Silanion_Musei_Capitolini_MC1377.jpg';
+
+            var rh = 20;
+            var begin = 1800;
+
+            var regions = [];
+
+            function drawRect(year, duration, row, color) {
+                context.beginPath();
+                context.rect(begin + year, row*rh+4, duration, rh-5); // - 1
+                context.fillStyle = color;
+                context.fill();
+                context.lineWidth = 1;
+                context.strokeStyle = color;
+                context.stroke();
+            }
+
+            function drawStroked(text, x, y, strokeColor = 'black', fillColor = 'white') {
+                context.font = "15px Arial";
+                context.strokeStyle = strokeColor;
+                context.lineWidth = 2;
+                context.strokeText(text, x, y);
+                context.fillStyle = fillColor;
+                context.fillText(text, x, y);
+            }
+
+            function drawCenturies() {
+                context.beginPath();
+                context.strokeStyle = '#c0c0c0';
+                var i;
+                for(i=1; i < 39; i++) {
+                    context.moveTo(100*i, 0);
+                    context.lineTo(100*i, 300);
+                    context.stroke();
+                }
+                context.font = "15px Arial";
+                context.fillStyle = 'black';
+                context.fillText("18th BC", begin - 1775, 15);
+                context.fillText("17th BC", begin - 1675, 15);
+                context.fillText("16th BC", begin - 1575, 15);
+                context.fillText("15th BC", begin - 1475, 15);
+                context.fillText("14th BC", begin - 1375, 15);
+                context.fillText("13th BC", begin - 1275, 15);
+                context.fillText("12th BC", begin - 1175, 15);
+                context.fillText("11th BC", begin - 1075, 15);
+                context.fillText("10th BC", begin -  975, 15);
+                context.fillText( "9th BC", begin -  875, 15);
+                context.fillText( "8th BC", begin -  775, 15);
+                context.fillText( "7th BC", begin -  675, 15);
+                context.fillText( "6th BC", begin -  575, 15);
+                context.fillText( "5th BC", begin -  475, 15);
+                context.fillText( "4th BC", begin -  375, 15);
+                context.fillText( "3rd BC", begin -  275, 15);
+                context.fillText( "2nd BC", begin -  175, 15);
+                context.fillText( "1st BC", begin -   75, 15);
+                context.fillText( "1st AD", begin +   25, 15);
+                context.fillText( "2nd AD", begin +  125, 15);
+                context.fillText( "3rd AD", begin +  225, 15);
+                context.fillText( "4th AD", begin +  325, 15);
+                context.fillText( "5th AD", begin +  425, 15);
+                context.fillText( "6th AD", begin +  525, 15);
+                context.fillText( "7th AD", begin +  625, 15);
+                context.fillText( "8th AD", begin +  725, 15);
+                context.fillText( "9th AD", begin +  825, 15);
+                context.fillText("10th AD", begin +  925, 15);
+                context.fillText("11th AD", begin + 1025, 15);
+                context.fillText("12th AD", begin + 1125, 15);
+                context.fillText("13th AD", begin + 1225, 15);
+                context.fillText("14th AD", begin + 1325, 15);
+                context.fillText("15th AD", begin + 1425, 15);
+                context.fillText("16th AD", begin + 1525, 15);
+                context.fillText("17th AD", begin + 1625, 15);
+                context.fillText("18th AD", begin + 1725, 15);
+                context.fillText("19th AD", begin + 1825, 15);
+                context.fillText("20th AD", begin + 1925, 15);
+            }
+
+            function lifespan(name, birth, death, row, color, img_url = aristotle) {
+                var duration = death - birth + 1;
+
+                var minX = begin + birth;
+                var minY = (row+1)*rh+4;
+                var maxX = minX + duration;
+                var maxY = minY + rh - 1;
+
+                regions.push([minX, minY, maxX, maxY, img_url]);
+
+                drawRect(birth, duration, row+1, color);
+                drawStroked(name, begin + birth + 1, rh*(row+1) + rh-4);
+            }
+
+            var canvas = document.getElementById('myCanvas');
+            var context = canvas.getContext('2d');
+
+            drawCenturies();
+
+            //lifespan("Homer*",              -800, -740, 0, '#a000a0'); 
+            //lifespan("Cyrus",               -600, -530, 2, '#a00000'); 
+            //lifespan("Pythagoras",          -570, -495, 0, '#a0a0a0'); 
+            //lifespan("Darius I",            -550, -486, 3, '#a00000'); 
+            //lifespan("Xerxes I",            -519, -466, 2, '#a00000'); 
+            //lifespan("Themistocles",        -524, -459, 1, '#a0a000'); 
+            //lifespan("Leonidas",            -540, -480, 4, '#a000a0'); 
+            //lifespan("Pericles",            -495, -429, 5, '#a00000'); 
+            //lifespan("Herodotus",           -484, -425, 6, '#00a000'); 
+            //lifespan("Thucydides",          -460, -400, 2, '#0000a0'); 
+            //lifespan("Euclid",              -435, -365, 4, '#a00000'); 
+            //lifespan("Hannibal",            -247, -181, 1, '#a000a0'); 
+            //lifespan("T. Gracchus",         -169, -133, 4, '#00a000'); 
+            //lifespan("G. Gracchus",         -154, -121, 5, '#a000a0'); 
+            //lifespan("Sulla",               -138, -78,  2, '#00a0a0'); 
+            //lifespan("Marius",              -157, -86,  3, '#a0a000'); 
+            //lifespan("Aristotle",           -384, -322, 0, '#a00000'); 
+            //lifespan("Plato",               -427, -348, 1, '#00a000'); 
+            //lifespan("Socrates",            -469, -399, 0, '#0000a0'); 
+            //lifespan("Alexander",           -356, -323, 2, '#a0a000'); 
+            //lifespan("Xenophon",            -431, -354, 3, '#a000a0'); 
+            //lifespan("Thales",              -624, -546, 1, '#a000a0'); 
+            //lifespan("Archimedes",          -287, -212, 0, '#0000a0'); 
+            //lifespan("Cleopatra",           -69,  -30,  3, '#00a000'); 
+            //lifespan("Caesar",              -100, -44,  0, '#a00000'); 
+            //lifespan("Jesus Christ",        -4,   33,   0, '#a0a000'); 
+            //lifespan("Cicero",              -106, -43,  1, '#0000a0'); 
+            //lifespan("Augustus",            -63,  -14,  2, '#a000a0'); 
+            //lifespan("Mark Antony",         -83,  -30,  4, '#a0a0a0'); 
+            //lifespan("Marcus Aurelius",     120,  180,  0, '#00a0a0'); 
+            //lifespan("Alaric",              370,  410,  2, '#00a0a0'); 
+            //lifespan("Saint Jerome",        347,  420,  1, '#00a0a0'); 
+            //lifespan("Augustine of Hippo",  354,  430,  0, '#00a0a0'); 
+            //lifespan("Clovis I",            466,  511,  1, '#00a0a0'); 
+            //lifespan("Charles Martel",      686,  741,  1, '#00a0a0'); 
+            //lifespan("Charlemagne",         742,  814,  0, '#00a0a0'); 
+            //lifespan("Otto I",              912,  973,  0, '#00a0a0'); 
+
+lifespan("Jean-Jacques Rousseau",                   1712, 1762, 0, '#00a000');
+lifespan("Thomas Aquinas",                          1225, 1275, 0, '#0000a0');
+lifespan("Mahatma Gandhi",                          1869, 1919, 0, '#a0a000');
+lifespan("Mark Antony",                             -83, -30, 0, '#a000a0');
+lifespan("Xenophon",                                -431, -354, 0, '#00a0a0');
+lifespan("Cyrus",                                   -600, -530, 0, '#a0a0a0');
+lifespan("Mozart",                                  1756, 1806, 1, '#a00000');
+lifespan("Marius",                                  -157, -86, 0, '#00a000');
+lifespan("William Shakespeare",                     1564, 1614, 0, '#0000a0');
+lifespan("Gilgamesh",                               -3500, -3450, 0, '#a0a000');
+lifespan("Vladimir Lenin",                          1870, 1920, 1, '#a000a0');
+lifespan("G. Gracchus",                             -154, -121, 1, '#00a0a0');
+lifespan("Zoroaster",                               -600, -550, 1, '#a0a0a0');
+lifespan("Laozi",                                   -400, -350, 1, '#a00000');
+lifespan("Galileo Galilei",                         1564, 1614, 1, '#00a000');
+lifespan("Caligula",                                12, 62, 0, '#0000a0');
+lifespan("Adolf Hitler",                            1889, 1939, 2, '#a0a000');
+lifespan("Charles Martel",                          686, 741, 0, '#a000a0');
+lifespan("Pythagoras",                              -570, -495, 2, '#00a0a0');
+lifespan("Avicenna",                                980, 1030, 0, '#a0a0a0');
+lifespan("Muhammad",                                570, 620, 0, '#a00000');
+lifespan("Elizabeth I of England",                  1533, 1583, 2, '#00a000');
+lifespan("Moses",                                   -1391, -1341, 0, '#0000a0');
+lifespan("Che Guevara",                             1928, 1978, 0, '#a0a000');
+lifespan("Genghis Khan",                            1162, 1212, 0, '#a000a0');
+lifespan("Adam Smith",                              1723, 1773, 2, '#00a0a0');
+lifespan("Horace",                                  -65, -15, 1, '#a0a0a0');
+lifespan("Nefertiti",                               -1370, -1320, 1, '#a00000');
+lifespan("Ramesses II",                             -1303, -1253, 0, '#00a000');
+lifespan("Augustine of Hippo",                      354, 404, 0, '#0000a0');
+lifespan("Euclid",                                  -435, -365, 2, '#a0a000');
+lifespan("Trajan",                                  53, 103, 1, '#a000a0');
+lifespan("Johann Sebastian Bach",                   1685, 1735, 1, '#00a0a0');
+lifespan("Attila the Hun",                          406, 456, 0, '#a0a0a0');
+lifespan("Anne Boleyn",                             1501, 1551, 0, '#a00000');
+lifespan("Raphael",                                 1483, 1533, 1, '#00a000');
+lifespan("Albert Einstein",                         1879, 1929, 3, '#0000a0');
+lifespan("Vasco da Gama",                           1469, 1519, 2, '#a0a000');
+lifespan("Aesop",                                   -620, -570, 3, '#a000a0');
+lifespan("Alaric",                                  370, 410, 1, '#00a0a0');
+lifespan("Joseph Stalin",                           1878, 1928, 4, '#a0a0a0');
+lifespan("Sophocles",                               -496, -446, 0, '#a00000');
+lifespan("Isaac Newton",                            1642, 1692, 0, '#00a000');
+lifespan("Saladin",                                 1138, 1188, 1, '#0000a0');
+lifespan("Leonidas I",                              -540, -490, 1, '#a0a000');
+lifespan("Akhenaten",                               -1380, -1330, 2, '#a000a0');
+lifespan("Jeanne d'Arc",                            1412, 1462, 0, '#00a0a0');
+lifespan("Socrates",                                -469, -399, 3, '#a0a0a0');
+lifespan("Aristotle",                               -384, -322, 3, '#a00000');
+lifespan("Plato",                                   -427, -348, 4, '#00a000');
+lifespan("John the Baptist",                        -5, 45, 1, '#0000a0');
+lifespan("Mary Magdalene",                          1, 51, 2, '#a0a000');
+lifespan("Ludwig van Beethoven",                    1770, 1820, 0, '#a000a0');
+lifespan("Qin Shi Huang",                           -259, -209, 0, '#00a0a0');
+lifespan("Marcus Aurelius",                         121, 171, 0, '#a0a0a0');
+lifespan("Solomon",                                 -1000, -950, 0, '#a00000');
+lifespan("Johannes Gutenberg",                      1398, 1448, 1, '#00a000');
+lifespan("Themitocles",                             -524, -459, 4, '#0000a0');
+lifespan("Homer*",                                  -800, -740, 0, '#a0a000');
+lifespan("Darius I",                                -550, -486, 3, '#a000a0');
+lifespan("Hannibal",                                -247, -181, 1, '#00a0a0');
+lifespan("Clovis I",                                466, 511, 0, '#a0a0a0');
+lifespan("Vincent van Gogh",                        1853, 1903, 5, '#a00000');
+lifespan("Saint Peter",                             0, 50, 3, '#00a000');
+lifespan("Blaise Pascal",                           1623, 1673, 1, '#0000a0');
+lifespan("Caesar",                                  -100, -44, 2, '#a0a000');
+lifespan("Jesus Christ",                            -4, 33, 4, '#a000a0');
+lifespan("Thucydides",                              -460, -400, 5, '#00a0a0');
+lifespan("Tutankhamun",                             -1341, -1291, 3, '#a0a0a0');
+lifespan("Epicurus",                                -341, -291, 0, '#a00000');
+lifespan("T. Gracchus",                             -169, -133, 2, '#00a000');
+lifespan("Otto I",                                  912, 973, 0, '#0000a0');
+lifespan("Ptolemy",                                 90, 140, 2, '#a0a000');
+lifespan("Augustus",                                -63, -14, 3, '#a000a0');
+lifespan("Nero",                                    37, 87, 4, '#00a0a0');
+lifespan("Cicero",                                  -106, -43, 4, '#a0a0a0');
+lifespan("Paul of Tarsus",                          5, 55, 5, '#a00000');
+lifespan("Sappho",                                  -625, -575, 2, '#00a000');
+lifespan("Herodotus",                               -484, -425, 1, '#0000a0');
+lifespan("Christopher Columbus",                    1451, 1501, 3, '#a0a000');
+lifespan("Louis XIV of France",                     1638, 1688, 2, '#a000a0');
+lifespan("Mary",                                    -18, 32, 6, '#00a0a0');
+lifespan("Sigmund Freud",                           1856, 1906, 6, '#a0a0a0');
+lifespan("Leonidas",                                -540, -480, 5, '#a00000');
+lifespan("Niccolò Machiavelli",                    1469, 1519, 4, '#00a000');
+lifespan("Dante Alighieri",                         1265, 1315, 1, '#0000a0');
+lifespan("Sulla",                                   -138, -78, 3, '#a0a000');
+lifespan("Charles Darwin",                          1809, 1859, 1, '#a000a0');
+lifespan("Voltaire",                                1694, 1744, 3, '#00a0a0');
+lifespan("Napoleon Bonaparte",                      1769, 1819, 3, '#a0a0a0');
+lifespan("Abraham",                                 -1800, -1750, 0, '#a00000');
+lifespan("Johann Wolfgang von Goethe",              1749, 1799, 4, '#00a000');
+lifespan("Heraclitus",                              -535, -485, 6, '#0000a0');
+lifespan("Hippocrates",                             -460, -410, 6, '#a0a000');
+lifespan("Pablo Picasso",                           1881, 1931, 7, '#a000a0');
+lifespan("Archimedes",                              -287, -212, 2, '#00a0a0');
+lifespan("Karl Marx",                               1818, 1868, 2, '#a0a0a0');
+lifespan("Marco Polo",                              1254, 1304, 2, '#a00000');
+lifespan("David",                                   -1040, -990, 1, '#00a000');
+lifespan("Charlemagne",                             742, 814, 0, '#0000a0');
+lifespan("Immanuel Kant",                           1724, 1774, 5, '#a0a000');
+lifespan("Aeschylus",                               -525, -475, 7, '#a000a0');
+lifespan("Cleopatra",                               -69, -30, 5, '#00a0a0');
+lifespan("Xerxes I",                                -519, -466, 8, '#a0a0a0');
+lifespan("Pericles",                                -495, -429, 9, '#a00000');
+lifespan("Saint Jerome",                            347, 420, 2, '#00a000');
+lifespan("René Descartes",                         1596, 1646, 3, '#0000a0');
+lifespan("Michelangelo",                            1475, 1525, 5, '#a0a000');
+lifespan("Thales",                                  -624, -546, 4, '#a000a0');
+lifespan("Gautama Buddha",                          -563, -513, 9, '#00a0a0');
+lifespan("Ferdinand Magellan",                      1480, 1530, 6, '#a0a0a0');
+lifespan("Martin Luther",                           1483, 1533, 7, '#a00000');
+lifespan("Leonardo da Vinci",                       1452, 1502, 8, '#00a000');
+lifespan("Confucius",                               -551, -501, 10, '#0000a0');
+lifespan("Ovid",                                    -43, 7, 7, '#a0a000');
+lifespan("Alexander",                               -356, -323, 2, '#a000a0');
+
+
+      		function writeMessage(canvas, message, x, y) {
+
+                var mySpan = document.getElementById('myImg');
+
+                var i;
+                var found = false;
+                var img_url;
+                for(i=0; i < regions.length; i++) {
+                    var minX = regions[i][0];
+                    var minY = regions[i][1];
+                    var maxX = regions[i][2];
+                    var maxY = regions[i][3];
+                    if((x > minX) && (y > minY) && (x < maxX) && (y < maxY)) {
+                        found = true;
+                        img_url = regions[i][4];
+                        break;
+                    }
+                }
+                if(found) {
+                    mySpan.style.display = "block";
+                    mySpan.style.top = y + "px";
+                    mySpan.style.left = x + "px";
+                    mySpan.src = img_url;
+                }
+                else      {
+                    mySpan.style.display = "none";
+                }
+
+      		}
+      		function getMousePos(canvas, evt) {
+      		    var rect = canvas.getBoundingClientRect();
+      		    return {
+      		      x: evt.clientX - rect.left,
+      		      y: evt.clientY - rect.top
+      		    };
+      		}
+
+      		//canvas.addEventListener('mousemove', function(evt) {
+      		//	var mousePos = getMousePos(canvas, evt);
+      		//	var message = mousePos.x + ',' + mousePos.y;
+      		//	writeMessage(canvas, message, mousePos.x, mousePos.y);
+      		//}, false);
+        </script>
+    </body>
+
+</html>
