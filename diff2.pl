@@ -63,7 +63,7 @@ foreach my $line (@lines0) {
     $r0++;
 }
 
-print "var rc_data = [\n";
+print "var data = [\n";
 for(my $r = 0; $r < $rows; $r++) {
 
     my $prev_col = 0;

@@ -1,14 +1,14 @@
-file_size                   196662
-file_offset_to_pixelarray   54
-dib_header_size             40
+file_size                   196746
+file_offset_to_pixelarray   138
+dib_header_size             124
 image_width                 256
 image_height                256
 planes                      1
 bits_per_pixel              24
 compression                 0
 image_size                  196608
-x_pixels_per_meter          3780
-y_pixels_per_meter          3780
+x_pixels_per_meter          0
+y_pixels_per_meter          0
 colors_in_color_table       0
 important_color_count       0
 colors:

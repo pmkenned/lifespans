@@ -7,7 +7,7 @@
 
         <canvas id="myCanvas" width="640" height="480"></canvas><br>
 
-        <script src="patch.js"></script>
+        <script src="patch3.js"></script>
         <script>
 
             var myCanvas = document.getElementById('myCanvas');
@@ -40,6 +40,11 @@
             function changeYear(direction) {
 
                 var di = delta_index;
+                if(direction < 0) {
+                    if(di > 0) {
+                        di--;
+                    }
+                }
 
                 var delta_rows = patch[di].length;
                 for(i = 0; i < delta_rows; i++) {
@@ -66,10 +71,14 @@
                 }
                 myContext.putImageData(id, 0,0);
                 if(direction > 0) {
-                    delta_index++;
+                    if(delta_index < patch.length) {
+                        delta_index++;
+                    }
                 }
                 else {
-                    delta_index--;
+                    if(delta_index > 0) {
+                        delta_index--;
+                    }
                 }
 
             }

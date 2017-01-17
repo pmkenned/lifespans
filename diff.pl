@@ -170,7 +170,8 @@ sub print_segment {
     print $color1r . ", " . $color1g . ", " . $color1b . ", ";
 }
 
-print "var rc_data = [\n";
+#print "var patch = [\n";
+print "[\n";
 for(my $r = 0; $r < $rows; $r++) {
 
     my $state = SAME;
@@ -288,4 +289,5 @@ for(my $r = 0; $r < $rows; $r++) {
     }
 
 }
-print "];\n";
+print "],\n";
+#print "];\n";
