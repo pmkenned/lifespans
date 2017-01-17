@@ -5,7 +5,7 @@
 
     <body>
 
-        <canvas id="myCanvas" width="640" height="480"></canvas><br>
+        <canvas id="myCanvas" width="1024" height="768"></canvas><br>
 
         <script src="patch3.js"></script>
         <script>
@@ -13,8 +13,8 @@
             var myCanvas = document.getElementById('myCanvas');
             var myContext = myCanvas.getContext('2d');
 
-            var h = 256; // TODO
-            var w = 256; // TODO
+            var h = 768; // TODO
+            var w = 1024; // TODO
 
             var id = myContext.createImageData(w,h);
             var d = id.data;
@@ -61,6 +61,11 @@
                         var new_g = patch[di][i][1+j*8+gi];
                         var new_b = patch[di][i][1+j*8+bi];
                         for(k = 0; k < nn; k++) {
+                            if((new_r == 0) && (new_g == 0) && (new_b == 0)) {
+                                new_r = 255;
+                                new_g = 255;
+                                new_b = 255;
+                            }
                             d[(w*row+begin+k)*4+0] = new_r;
                             d[(w*row+begin+k)*4+1] = new_g;
                             d[(w*row+begin+k)*4+2] = new_b;

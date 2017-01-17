@@ -17,7 +17,8 @@ do
     txt=$base.txt
     #ptm=$base.ptm
 
-    magick $png -flatten -type TrueColor $bmp
+    #magick $png -flatten -type TrueColor $bmp
+    magick $png -type TrueColor $bmp
     ./bmp.exe $bmp > $txt
     if [ $first -eq 1 ];
     then

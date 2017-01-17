@@ -50,18 +50,18 @@ my ($rows0, $rows1, $cols0, $cols1);
 
 $_ = $lines0[0];
 $_ =~ /(\d+)/;
-$rows0 = $1;
+$cols0 = $1;
 $_ = $lines0[1];
 $_ =~ /(\d+)/;
-$cols0 = $1;
+$rows0 = $1;
 
 if($mode == 2) {
     $_ = $lines1[0];
     $_ =~ /(\d+)/;
-    $rows1 = $1;
+    $cols1 = $1;
     $_ = $lines1[1];
     $_ =~ /(\d+)/;
-    $cols1 = $1;
+    $rows1 = $1;
 }
 else {
     $rows1 = $rows0;

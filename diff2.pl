@@ -33,10 +33,10 @@ my ($rows0, $rows1, $cols0, $cols1);
 
 $_ = $lines0[0];
 $_ =~ /(\d+)/;
-$rows0 = $1;
+$cols0 = $1;
 $_ = $lines0[1];
 $_ =~ /(\d+)/;
-$cols0 = $1;
+$rows0 = $1;
 
 for(my $i=0; $i < 12; $i++) {
     shift @lines0;
